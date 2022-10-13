@@ -53,7 +53,7 @@ class AlcoholAndGasolineScreen: UIView {
         textField.autocorrectionType = .no // para correção automatica do teclado, nesse caso desativado
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
-        textField.keyboardType = .numberPad // estilo do teclado para quem vai escrever email
+        textField.keyboardType = .numberPad // estilo do teclado para quem vai escrever numero
         textField.placeholder = "Ex: 2.70"
         textField.textColor = .darkGray
         return textField
@@ -65,7 +65,7 @@ class AlcoholAndGasolineScreen: UIView {
         textField.autocorrectionType = .no // para correção automatica do teclado, nesse caso desativado
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
-        textField.keyboardType = .numberPad // estilo do teclado para quem vai escrever email
+        textField.keyboardType = .numberPad // estilo do teclado para quem vai escrever numero
         textField.placeholder = "Ex: 3.47"
         textField.textColor = .darkGray
         return textField
@@ -153,6 +153,27 @@ class AlcoholAndGasolineScreen: UIView {
     
     @objc private func tappedCalculateButton() {
         self.delegate?.actionCalculateButton()
+    }
+    
+    public func validaTextFields() {
+        let alcohol: Double = Double(alcoholTextField.text ?? "0.0") ?? 0.0
+        let gasoline: Double = Double(gasolineTextField.text ?? "0.0") ?? 0.0
+        
+        if alcohol != 0 && gasoline != 0 {
+            configButtonEnabel(true)
+        } else {
+            configButtonEnabel(false)
+        }
+    }
+    
+    private func configButtonEnabel(_ enabel: Bool) {
+        if enabel {
+            self.calculateButton.setTitleColor(.white, for: .normal)
+            self.calculateButton.isEnabled = true // permitido apertar o botao "isEnabled"
+        } else {
+            self.calculateButton.setTitleColor(.lightGray, for: .normal)
+            self.calculateButton.isEnabled = false // nao permitido apertar o botao
+        }
     }
     
     required init?(coder: NSCoder) {
