@@ -96,9 +96,10 @@ class AlcoholAndGasolineScreen: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Calcular", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18) // tamanho da fonte
-        button.setTitleColor(.white, for: .normal) // cor para o texto
+        button.setTitleColor(.lightGray, for: .normal) // cor para o texto
         button.backgroundColor = .darkGray
         button.layer.cornerRadius = 7.5
+        button.isEnabled = false
         button.addTarget(self, action: #selector(self.tappedCalculateButton), for: .touchUpInside)
         return button
     }()
@@ -108,8 +109,9 @@ class AlcoholAndGasolineScreen: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false // seta as constraints de maneira automatica, e nao queremos isso
         label.textAlignment = .center
         label.textColor = .black // cor da fonte da escrita
+        label.numberOfLines = 0
         label.font = UIFont.boldSystemFont(ofSize: 25)
-        label.text = "O melhor é ..."
+        label.text = ""
         return label
     }()
     

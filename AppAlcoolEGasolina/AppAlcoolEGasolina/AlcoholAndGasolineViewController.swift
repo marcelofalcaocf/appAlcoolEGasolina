@@ -21,7 +21,7 @@ class AlcoholAndGasolineViewController: UIViewController {
         alcoholAndGasoline?.delegate(delegate: self)
         alcoholAndGasoline?.configTextFieldDelegate(delegate: self)
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
@@ -30,13 +30,13 @@ class AlcoholAndGasolineViewController: UIViewController {
 
 extension AlcoholAndGasolineViewController: AlcoholAndGasolineScreenProtocol {
     func actionCalculateButton() {
-        let ethanolPrice: Double = Double(alcoholAndGasoline?.alcoholLabel.text ?? "0.0") ?? 0.0
-        let gasolinePrice: Double = Double(alcoholAndGasoline?.gasolinelLabel.text ?? "0.0") ?? 0.0
         
-        if ethanolPrice / gasolinePrice > 0.7 {
-            alcoholAndGasoline?.bestLabel.text = "Melhor utilizar Gasolina"
-        } else {
-            alcoholAndGasoline?.bestLabel.text = "Melhor utilizar Álcool"
+        if let ethanolPrice = Double(alcoholAndGasoline?.alcoholTextField.text ?? "0.0"), let gasoline = Double(alcoholAndGasoline?.gasolineTextField.text ?? "0.0") {
+            if (ethanolPrice / gasoline) > 0.7 {
+                alcoholAndGasoline?.bestLabel.text = "Pelo comparativo, a melhor alternativa é encher com gasolina"
+            } else {
+                alcoholAndGasoline?.bestLabel.text = "Pelo comparativo, a melhor alternativa é encher com álcool"
+            }
         }
     }
 }
